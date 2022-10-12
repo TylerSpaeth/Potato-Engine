@@ -1,18 +1,18 @@
-import org.lwjgl.*;
+package GameEngine;
+
 import org.lwjgl.glfw.*;
 import org.lwjgl.opengl.*;
 import org.lwjgl.system.*;
 
 import java.nio.*;
 
-import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.system.MemoryStack.*;
-import static org.lwjgl.system.MemoryUtil.*;
 
 /**
- * This class holds the functionality of a window for the Potato Engine.
+ * This class holds the functionality of a window for the Potato GameEngine.Engine. Windows are a singleton
+ * so only one may exist at a time.
  * <br>
  * <br>
  * Makes use of LWJGL libraries.
@@ -22,13 +22,20 @@ import static org.lwjgl.system.MemoryUtil.*;
  * @author Tyler Spaeth
  */
 public class Window {
+  // TODO this class needs to be overhauled in order to be more modular and work better with other
+  //  components
+
+  // Variable for the one window that will exist
+  private static Window _window = null;
 
   // Variable to store the handle of the window.
-  private long window;
-  // Variables for window size
+  private long windowHandle;
+
+  // Variables for window attributes
   private int width;
   private int height;
-  private String title;
+  private final String title;
+  private boolean vsync;
 
   /**
    * Constructor for the window object
@@ -38,11 +45,42 @@ public class Window {
    * @param title title for the window
    */
   public Window(int width, int height, String title) {
+    // If another window already exist throw an exception. This way only one can exist
+    if(_window != null) {
+      throw new IllegalStateException("A window has already been initialized, only one may exist" +
+          " at a time ");
+    }
+    // Set the window instance to this one
+    _window = this;
+
     this.width = width;
     this.height = height;
     this.title = title;
+    this.vsync = true;
   }
 
+  /**
+   * Constructor for the window object
+   *
+   * @param width the width in pixels of the window
+   * @param height the height in pixels of the window
+   * @param title title for the window
+   * @param vsync whether vsync should be enabled or not
+   */
+  public Window(int width, int height, String title, boolean vsync) {
+    // If another window already exist throw an exception. This way only one can exist
+    if(_window != null) {
+      throw new IllegalStateException("A window has already been initialized, only one may exist" +
+          " at a time ");
+    }
+    // Set the window instance to this one
+    _window = this;
+
+    this.width = width;
+    this.height = height;
+    this.title = title;
+    this.vsync = vsync;
+  }
 
   public void run() {}
 
@@ -69,15 +107,15 @@ public class Window {
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
     // Create the window and assign the handle
-    window = glfwCreateWindow(width, height, title, 0, 0);
+    windowHandle = glfwCreateWindow(width, height, title, 0, 0);
     // If the window handle has not been changed from its default value of zero, a window has not
     // been created
-    if(window == 0) {
+    if(windowHandle == 0) {
       throw new RuntimeException("Failed to create the GLFW window");
     }
 
     // Setup a key callback. It will be called every time a key is pressed, repeated or released.
-    glfwSetKeyCallback(window, (window, key, scancode, action, mods) -> {
+    glfwSetKeyCallback(windowHandle, (window, key, scancode, action, mods) -> {
       if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
         glfwSetWindowShouldClose(window, true); // We will detect this in the rendering loop
     });
@@ -88,26 +126,29 @@ public class Window {
       IntBuffer pHeight = stack.mallocInt(1); // int*
 
       // Get the window size passed to glfwCreateWindow
-      glfwGetWindowSize(window, pWidth, pHeight);
+      glfwGetWindowSize(windowHandle, pWidth, pHeight);
 
       // Get the resolution of the primary monitor
-      GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+      GLFWVidMode vidMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 
       // Center the window
       glfwSetWindowPos(
-          window,
-          (vidmode.width() - pWidth.get(0)) / 2,
-          (vidmode.height() - pHeight.get(0)) / 2
+          windowHandle,
+          (vidMode.width() - pWidth.get(0)) / 2, // Screen width - window width / 2
+          (vidMode.height() - pHeight.get(0)) / 2 // screen height - window height / 2
       );
     } // the stack frame is popped automatically
 
     // Make the OpenGL context current
-    glfwMakeContextCurrent(window);
-    // Enable v-sync
-    glfwSwapInterval(1);
+    glfwMakeContextCurrent(windowHandle);
+
+    if(vsyncEnabled()) {
+      // Enable v-sync
+      glfwSwapInterval(1);
+    }
 
     // Makes the window visible
-    glfwShowWindow(window);
+    glfwShowWindow(windowHandle);
   }
 
   /**
@@ -132,15 +173,32 @@ public class Window {
 
     // Run the rendering loop until the user has attempted to close
     // the window or has pressed the ESCAPE key.
-    while (!glfwWindowShouldClose(window)) {
+    while (!glfwWindowShouldClose(windowHandle)) {
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
-      glfwSwapBuffers(window); // swap the color buffers
+      glfwSwapBuffers(windowHandle); // swap the color buffers
 
       // Poll for window events. The key callback above will only be
       // invoked during this call.
       glfwPollEvents();
     }
+    // Once the window has been closed
+
+    // Destroy the window
+    glfwDestroyWindow(windowHandle);
+
+    // Terminate the window
+    glfwTerminate();
+    glfwSetErrorCallback(null).free();
+  }
+
+  /**
+   * This method checks if vsync is enabled
+   *
+   * @return true if vsync is enabled, otherwise false
+   */
+  private boolean vsyncEnabled() {
+    return vsync;
   }
 
 }
