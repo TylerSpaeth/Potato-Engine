@@ -13,7 +13,8 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * This class holds the functionality of a window for the Potato Engine.
- *
+ * <br>
+ * <br>
  * Makes use of LWJGL libraries.
  *
  * @see <a href="https://www.lwjgl.org/guide">https://www.lwjgl.org/guide</a>
@@ -47,6 +48,8 @@ public class Window {
 
   /**
    * Method for initializing the window.
+   * <br>
+   * <br>
    * *Mainly just  the boilerplate code defined by the LWJGL sample*
    *
    * @see <a href="https://www.lwjgl.org/guide">https://www.lwjgl.org/guide</a>
@@ -80,7 +83,7 @@ public class Window {
     });
 
     // Get the thread stack and push a new frame
-    try ( MemoryStack stack = stackPush() ) {
+    try (MemoryStack stack = stackPush()) {
       IntBuffer pWidth = stack.mallocInt(1); // int*
       IntBuffer pHeight = stack.mallocInt(1); // int*
 
@@ -109,6 +112,8 @@ public class Window {
 
   /**
    * Method for updating the window.
+   * <br>
+   * <br>
    * *Much of the code comes from the loop method defined in the LWJGL sample*
    *
    * @see <a href="https://www.lwjgl.org/guide">https://www.lwjgl.org/guide</a>
