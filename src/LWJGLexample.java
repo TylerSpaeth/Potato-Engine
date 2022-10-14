@@ -108,8 +108,10 @@ public class LWJGLexample {
         }
     }
 
+    /*
     public static void main(String[] args) {
-        new LWJGLexample().run();
+      new LWJGLexample().run();
     }
+    */
 
 }
