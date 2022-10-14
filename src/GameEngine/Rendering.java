@@ -1,4 +1,4 @@
-package GameEngine.GameObject;
+package GameEngine;
 
 /**
  * Class for render to the window

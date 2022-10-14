@@ -1,5 +1,7 @@
 package GameEngine.GameObject;
 
+import GameEngine.GameObject.Components.Component;
+
 import java.util.ArrayList;
 
 /**

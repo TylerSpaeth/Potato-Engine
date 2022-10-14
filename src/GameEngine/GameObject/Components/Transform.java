@@ -1,5 +1,6 @@
-package GameEngine.GameObject;
+package GameEngine.GameObject.Components;
 
+import GameEngine.GameObject.Components.Component;
 import GameEngine.Vector2.Vector2;
 
 /**
@@ -7,7 +8,7 @@ import GameEngine.Vector2.Vector2;
  *
  * @author Tyler Spaeth
  */
-public class Transform extends Component{
+public class Transform extends Component {
   // TODO Decide whether the position should be world or screen space and refactor code to match
   private Vector2 position;
   private int rotation; // Will be 0-359

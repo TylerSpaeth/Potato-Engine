@@ -88,7 +88,7 @@ public class Window {
    * Method for initializing the window.
    * <br>
    * <br>
-   * *Mainly just  the boilerplate code defined by the LWJGL sample*
+   * *Mainly just the boilerplate code defined by the LWJGL sample*
    *
    * @see <a href="https://www.lwjgl.org/guide">https://www.lwjgl.org/guide</a>
    */
