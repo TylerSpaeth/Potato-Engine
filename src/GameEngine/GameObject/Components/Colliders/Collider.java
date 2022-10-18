@@ -11,6 +11,7 @@ public abstract class Collider {
 
   private Vector2 centerPosition; // The center position for the Collider
   private boolean isTrigger; // If the Collider should act as trigger instead of a solid Collider
+  protected Type type;
 
   /**
    * Constructor for a Collider object. Takes in a centerPosition and isTrigger parameters.
@@ -59,4 +60,11 @@ public abstract class Collider {
     this.isTrigger = isTrigger;
   }
 
+  public abstract boolean collided(Collider other);
 }
+
+enum Type {
+  BOX,
+  CIRCLE;
+}
+

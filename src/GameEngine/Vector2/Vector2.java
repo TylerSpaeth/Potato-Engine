@@ -54,4 +54,14 @@ public class Vector2 {
     return y;
   }
 
+  /**
+   * Converts the Vector2 to a String
+   *
+   * @return String representation of this Vector2
+   */
+  @Override
+  public String toString() {
+    return x + ", " + y;
+  }
+
 }
