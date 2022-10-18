@@ -17,7 +17,8 @@ public class ColliderTester {
    * @return true if all tests pass, otherwise false
    */
   public static boolean runAllTests()  {
-    return testBoxCollider();
+    return testBoxCollider()
+        && testCircleCollider();
   }
 
   /**
@@ -235,6 +236,135 @@ public class ColliderTester {
 
       return true; // If all tests pass
     }
+  }
+
+  /**
+   * Tester for the BoxCollider object
+   *
+   * @return true if all tests pass, otherwise false
+   */
+  private static boolean testCircleCollider() {
+
+    // (1) Test Collision with another circle that it should collide with
+    {
+      CircleCollider testCollider = new CircleCollider(new Vector2(0,0),
+          false, 1);
+      CircleCollider otherTestCollider = new CircleCollider(new Vector2(2,0),
+          false, 1);
+      if(testCollider.collided(otherTestCollider) == false) {
+        System.err.println("testCircleCollider test 1 failed. " +
+            "Collision was expected but did not happen.");
+        return false;
+      }
+    }
+    // (2) Test collision with a circle in same position
+    {
+      CircleCollider testCollider = new CircleCollider(new Vector2(0,0),
+          false, 1);
+      if(testCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 2 failed. " +
+            "Collision was expected but did not happen.");
+        return false;
+      }
+    }
+    // (3) Test Collision against a BoxCollider from the Bottom
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(0, 2),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 3 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+    // (4) Test Collision against a BoxCollider from the Left
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(2, 0),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 4 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+    // (5) Test Collision against a BoxCollider from the Top
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(0, -2),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 5 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+    // (5) Test Collision against a BoxCollider from the Right
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(-2, 0),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 5 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+    // (6) Test Collision against on BoxCollider in the Bottom-Left corner
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(1.707f, 1.707f),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 6 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+    // (7) Test Collision against on BoxCollider in the Bottom-Right corner
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(-1.707f, 1.707f),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 7 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+    // (8) Test Collision against on BoxCollider in the Top-Right corner
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(-1.707f, -1.707f),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 8 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+    // (9) Test Collision against on BoxCollider in the Top-Left corner
+    {
+      BoxCollider testCollider = new BoxCollider(new Vector2(0, 0),
+          false, new Vector2(1, 1));
+      CircleCollider circleCollider = new CircleCollider(new Vector2(1.707f, -1.707f),
+          false, 1);
+      if (circleCollider.collided(testCollider) == false) {
+        System.err.println("testCircleCollider test 9 has failed. A collision was expected " +
+            "but did not happened.");
+        return false;
+      }
+    }
+
+    return true; // If all tests pass
   }
 
 }

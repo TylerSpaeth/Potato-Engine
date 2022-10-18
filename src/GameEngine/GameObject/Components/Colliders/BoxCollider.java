@@ -84,7 +84,7 @@ public class BoxCollider extends Collider {
     }
     // Begin Collision with a CircleCollider
     else if (other.type == Type.CIRCLE) {
-      //TODO only check the corners not the whole side - for optimization sake
+      // TODO only check the corners not the whole side - for optimization sake
       CircleCollider circle = (CircleCollider) other;
       Vector2 circleCenter = circle.getCenterPosition();
       float circleRadius = circle.getRadius();
