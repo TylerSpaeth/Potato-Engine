@@ -1,6 +1,6 @@
-package GameEngine.GameObject.Components.Colliders;
+package GameEngine.GameObjects.Components.Colliders;
 
-import GameEngine.GameObject.Components.Component;
+import GameEngine.GameObjects.Components.Component;
 import GameEngine.Utils.Vector2.Vector2;
 
 /**

@@ -1,4 +1,4 @@
-package GameEngine.GameObject.Components;
+package GameEngine.GameObjects.Components;
 
 /**
  * Components are all the things that a GameObject can have

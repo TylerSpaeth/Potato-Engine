@@ -1,6 +1,6 @@
 package GameEngine;
 
-import GameEngine.GameObject.GameObject;
+import GameEngine.GameObjects.GameObject;
 import GameEngine.Utils.Time.DeltaTime;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class Engine {
     // TODO determine if this is the best way to handle this.
     if(!window.isShouldClose()) { // While the window should not close keep updating
       window.update();
-
+      window.reduceWindowOpacity();
       //Updates the DeltaTIme, setting the deltaTIme to the amount of time since this was last
       // called. Keep this at the start or end of the function
       DeltaTime.update();

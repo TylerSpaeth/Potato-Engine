@@ -1,7 +1,7 @@
-package GameEngine.GameObject;
+package GameEngine.GameObjects;
 
-import GameEngine.GameObject.Components.Component;
-import GameEngine.GameObject.Components.Transform;
+import GameEngine.GameObjects.Components.Component;
+import GameEngine.GameObjects.Components.Transform;
 import com.sun.jdi.request.DuplicateRequestException;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package GameEngine.GameObject.Components.Colliders;
+package GameEngine.GameObjects.Components.Colliders;
 
 import GameEngine.Utils.Vector2.Vector2;
 

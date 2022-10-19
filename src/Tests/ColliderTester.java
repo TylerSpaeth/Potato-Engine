@@ -1,7 +1,7 @@
 package Tests;
 
-import GameEngine.GameObject.Components.Colliders.BoxCollider;
-import GameEngine.GameObject.Components.Colliders.CircleCollider;
+import GameEngine.GameObjects.Components.Colliders.BoxCollider;
+import GameEngine.GameObjects.Components.Colliders.CircleCollider;
 import GameEngine.Utils.Vector2.Vector2;
 
 /**

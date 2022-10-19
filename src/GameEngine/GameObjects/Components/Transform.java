@@ -1,4 +1,4 @@
-package GameEngine.GameObject.Components;
+package GameEngine.GameObjects.Components;
 
 import GameEngine.Utils.Vector2.Vector2;
 
