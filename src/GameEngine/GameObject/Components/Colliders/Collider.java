@@ -1,5 +1,6 @@
 package GameEngine.GameObject.Components.Colliders;
 
+import GameEngine.GameObject.Components.Component;
 import GameEngine.Utils.Vector2.Vector2;
 
 /**
@@ -7,7 +8,7 @@ import GameEngine.Utils.Vector2.Vector2;
  *
  * @author Tyler Spaeth
  */
-public abstract class Collider {
+public abstract class Collider extends Component {
 
   private Vector2 centerPosition; // The center position for the Collider
   private boolean isTrigger; // If the Collider should act as trigger instead of a solid Collider
