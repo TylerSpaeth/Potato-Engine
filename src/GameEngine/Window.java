@@ -23,13 +23,16 @@ import static org.lwjgl.system.MemoryStack.*;
  */
 public class Window {
   // TODO this class needs to be overhauled in order to be more modular and work better with other
-  //  components
+  //  components. Also make sure that the way it interacts with the Engine is correct
+
 
   // Variable for the one window that will exist
   private static Window _window = null;
 
   // Variable to store the handle of the window.
   private long windowHandle;
+
+  private boolean shouldClose; // Determines whether the window should close
 
   // Variables for window attributes
   private int width;
@@ -82,8 +85,6 @@ public class Window {
     this.vsync = vsync;
   }
 
-  public void run() {}
-
   /**
    * Method for initializing the window.
    * <br>
@@ -93,6 +94,8 @@ public class Window {
    * @see <a href="https://www.lwjgl.org/guide">https://www.lwjgl.org/guide</a>
    */
   public void init() {
+    this.shouldClose = false;
+
     // Initializes the error callback to print to system.err
     GLFWErrorCallback.createPrint(System.err).set();
 
@@ -149,6 +152,17 @@ public class Window {
 
     // Makes the window visible
     glfwShowWindow(windowHandle);
+
+
+    // This line is critical for LWJGL's interoperation with GLFW's
+    // OpenGL context, or any context that is managed externally.
+    // LWJGL detects the context that is current in the current thread,
+    // creates the GLCapabilities instance and makes the OpenGL
+    // bindings available for use.
+    GL.createCapabilities();
+
+    // Setup clear color
+    glClearColor(1,0,0,0);
   }
 
   /**
@@ -160,20 +174,9 @@ public class Window {
    * @see <a href="https://www.lwjgl.org/guide">https://www.lwjgl.org/guide</a>
    */
   public void update() {
-    // TODO this method needs to be changed so that it is not handling if the window should close
-    // This line is critical for LWJGL's interoperation with GLFW's
-    // OpenGL context, or any context that is managed externally.
-    // LWJGL detects the context that is current in the current thread,
-    // creates the GLCapabilities instance and makes the OpenGL
-    // bindings available for use.
-    GL.createCapabilities();
-
-    // Setup clear color
-    glClearColor(1,0,0,0);
-
     // Run the rendering loop until the user has attempted to close
     // the window or has pressed the ESCAPE key.
-    while (!glfwWindowShouldClose(windowHandle)) {
+    if (!glfwWindowShouldClose(windowHandle)) {
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // clear the framebuffer
 
       glfwSwapBuffers(windowHandle); // swap the color buffers
@@ -183,14 +186,24 @@ public class Window {
       // invoked during this call.
       glfwPollEvents();
     }
-    // Once the window has been closed
+    else {
+      shouldClose = true;
+    }
 
+
+  }
+
+  public void closeWindow() {
     // Destroy the window
     glfwDestroyWindow(windowHandle);
 
     // Terminate the window
     glfwTerminate();
     glfwSetErrorCallback(null).free();
+  }
+
+  public boolean isShouldClose() {
+    return this.shouldClose;
   }
 
   /**

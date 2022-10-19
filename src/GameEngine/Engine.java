@@ -32,9 +32,18 @@ public class Engine {
     // Initialize all the objects that have just been created if they need to be
     window.init();
 
-    //TODO get rid of this
-    window.update();
+    update();
   }
 
+  public static void update() {
+    // TODO determine if this is the best way to handle this.
+    if(!window.isShouldClose()) { // While the window should not close keep updating
+      window.update();
+      update();
+    }
+    else {
+      window.closeWindow(); // Otherwise close the Window
+    }
+  }
 
 }
