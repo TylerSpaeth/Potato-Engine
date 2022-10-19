@@ -108,6 +108,7 @@ public class Window {
     glfwDefaultWindowHints();
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+    glfwWindowHint(GLFW_DECORATED, GLFW_FALSE); // Makes the window not have any border
 
     // Create the window and assign the handle
     windowHandle = glfwCreateWindow(width, height, title, 0, 0);
@@ -193,6 +194,9 @@ public class Window {
 
   }
 
+  /**
+   * Closes the window
+   */
   public void closeWindow() {
     // Destroy the window
     glfwDestroyWindow(windowHandle);
@@ -202,6 +206,11 @@ public class Window {
     glfwSetErrorCallback(null).free();
   }
 
+  /**
+   * Checks if the window should be closing
+   *
+   * @return A boolean for if the window should close
+   */
   public boolean isShouldClose() {
     return this.shouldClose;
   }

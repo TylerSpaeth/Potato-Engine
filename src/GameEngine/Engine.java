@@ -1,6 +1,7 @@
 package GameEngine;
 
 import GameEngine.GameObject.GameObject;
+import GameEngine.Utils.Time.DeltaTime;
 
 import java.util.ArrayList;
 
@@ -30,16 +31,24 @@ public class Engine {
     camera = new Camera();
 
     // Initialize all the objects that have just been created if they need to be
+    DeltaTime.init(); // Starts DeltaTime
     window.init();
 
-    update();
   }
 
+  /**
+   * This method makes the Engine run.
+   */
   public static void update() {
     // TODO determine if this is the best way to handle this.
     if(!window.isShouldClose()) { // While the window should not close keep updating
       window.update();
-      update();
+
+      //Updates the DeltaTIme, setting the deltaTIme to the amount of time since this was last
+      // called. Keep this at the start or end of the function
+      DeltaTime.update();
+
+      update(); // Recursive statement. Keeps the updates going for as long as the Window is open
     }
     else {
       window.closeWindow(); // Otherwise close the Window

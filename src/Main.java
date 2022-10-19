@@ -9,6 +9,6 @@ public class Main {
     // End Tests
 
     Engine.init(500,500, "Title");
-
+    Engine.update();
   }
 }
