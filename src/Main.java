@@ -1,17 +1,14 @@
-import GameEngine.Window;
-import Tests.ColliderTester;
+import GameEngine.Engine;
+import Tests.MainTester;
 
 public class Main {
   public static void main(String[] args) {
 
     // Begin Tests
-    System.out.println(ColliderTester.runAllTests());
+    System.out.println(MainTester.runAllTests());
     // End Tests
 
-    Window window = new Window(100,500,"Hello");
-    window.init();
-    window.update();
-
+    Engine.init(500,500, "Title");
 
   }
 }

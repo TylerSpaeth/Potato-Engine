@@ -2,7 +2,7 @@ package Tests;
 
 import GameEngine.GameObject.Components.Colliders.BoxCollider;
 import GameEngine.GameObject.Components.Colliders.CircleCollider;
-import GameEngine.Vector2.Vector2;
+import GameEngine.Utils.Vector2.Vector2;
 
 /**
  * Tester for the Collider object along with its derived objects
@@ -27,7 +27,6 @@ public class ColliderTester {
    * @return true if all tests pass, otherwise false
    */
   private static boolean testBoxCollider() {
-    // TODO complete this tester
 
     // (1) Test collision with a box collider that should have collided
     {
@@ -123,8 +122,6 @@ public class ColliderTester {
         return false;
       }
     }
-
-    // TODO test colliding with a CircleCollider
 
     // (9) Test Collision against a CircleCollider from the Top
     {

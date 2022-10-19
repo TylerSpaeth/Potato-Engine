@@ -1,7 +1,6 @@
 package GameEngine.GameObject.Components;
 
-import GameEngine.GameObject.Components.Component;
-import GameEngine.Vector2.Vector2;
+import GameEngine.Utils.Vector2.Vector2;
 
 /**
  * Transform is a type of Component the holds things like position, rotation and height.
@@ -9,7 +8,7 @@ import GameEngine.Vector2.Vector2;
  * @author Tyler Spaeth
  */
 public class Transform extends Component {
-  // TODO Decide whether the position should be world or screen space and refactor code to match
+  // TODO ensure that scale can not be negative
   private Vector2 position;
   private int rotation; // Will be 0-359
   private Vector2 scale; // Scale of the item (1,1) would be default size

@@ -1,4 +1,4 @@
-package GameEngine.Vector2;
+package GameEngine.Utils.Vector2;
 
 /**
  * Vector2 is an object that stores x and y coordinates.

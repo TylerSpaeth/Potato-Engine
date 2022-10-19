@@ -1,2 +1,3 @@
 -Update Javadocs so that code is documented better
 -Implement test methods for all of the classes
+-Make sure exceptions are thrown when null or inappropriate values are passed to methods

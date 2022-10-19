@@ -1,6 +1,6 @@
 package GameEngine.GameObject.Components.Colliders;
 
-import GameEngine.Vector2.Vector2;
+import GameEngine.Utils.Vector2.Vector2;
 
 /**
  * Collider is the base class in which all types of Collider derive.

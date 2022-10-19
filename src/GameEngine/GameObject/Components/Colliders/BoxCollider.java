@@ -1,6 +1,6 @@
 package GameEngine.GameObject.Components.Colliders;
 
-import GameEngine.Vector2.Vector2;
+import GameEngine.Utils.Vector2.Vector2;
 
 /**
  * A rectangular Collider.
@@ -8,7 +8,7 @@ import GameEngine.Vector2.Vector2;
  * @author Tyler Spaeth
  */
 public class BoxCollider extends Collider {
-
+  // TODO ensure that boxDimensions can not be negative
   private Vector2 boxDimensions;
 
   /**

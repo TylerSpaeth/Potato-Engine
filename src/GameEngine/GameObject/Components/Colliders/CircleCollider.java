@@ -1,6 +1,6 @@
 package GameEngine.GameObject.Components.Colliders;
 
-import GameEngine.Vector2.Vector2;
+import GameEngine.Utils.Vector2.Vector2;
 
 /**
  * A circular Collider.
@@ -8,7 +8,7 @@ import GameEngine.Vector2.Vector2;
  * @author Tyler Spaeth
  */
 public class CircleCollider extends Collider {
-
+  // TODO make sure than radius can not be negative
   private float radius; // The radius of the circle
 
   /**
@@ -42,6 +42,12 @@ public class CircleCollider extends Collider {
     this.radius = radius;
   }
 
+  /**
+   * Checks if this CircleCollider collided with the given Collider
+   *
+   * @param other the Collider to check if there was collision with
+   * @return true if there is collision
+   */
   @Override
   public boolean collided(Collider other) {
     //TODO finish this
