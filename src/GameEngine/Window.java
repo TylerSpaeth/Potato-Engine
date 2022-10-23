@@ -51,6 +51,7 @@ public class Window extends JFrame {
     setVisible(true);
 
     // Creation of canvas
+
     canvas = new Canvas();
     canvas.setPreferredSize(new Dimension(width, height));
     canvas.setMaximumSize(new Dimension(width, height));
@@ -59,7 +60,6 @@ public class Window extends JFrame {
 
     add(canvas);
     pack();
-
   }
 
   public void update(){

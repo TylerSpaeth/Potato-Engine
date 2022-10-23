@@ -1,7 +1,5 @@
 package GameEngine.Utils.Time;
 
-import java.time.Instant;
-
 /**
  * DeltaTime is the time between updates of a loop.
  *
@@ -19,14 +17,14 @@ public class DeltaTime {
    * Initializes DeltaTime by getting the current time
    */
   public static void init() {
-    lastTime = Instant.now().getNano(); // Set the last time equal to the current nanosecond
+    lastTime = System.nanoTime(); // Set the last time equal to the current nanosecond
   }
 
   /**
    * Updates delta time by getting the current time and subtracting the last time this was called
    */
   public static void update() {
-    float currentTime = Instant.now().getNano(); // The current time
+    float currentTime = System.nanoTime(); // The current time
     deltaTime = currentTime - lastTime;
     lastTime = currentTime; // Set the last time this was called to this time
   }

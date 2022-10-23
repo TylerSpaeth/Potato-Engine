@@ -17,6 +17,7 @@ public class Engine {
  //TODO get window for this class
   private static Renderer renderer;
   private static Camera camera;
+  private static Window window;
 
   private static boolean running; // If the engine is running
 
@@ -30,15 +31,15 @@ public class Engine {
    */
   public static void init(int windowWidth, int windowHeight, String title) {
     gameObjects = new ArrayList<>();
-    renderer = new Renderer();
+    window = new Window(windowWidth, windowHeight, title);
+    renderer = new Renderer(window);
     camera = new Camera();
-    //TODO initalize window
+
 
     // Initialize all the objects that have just been created if they need to be
     DeltaTime.init(); // Starts DeltaTime
-
-    Window window = new Window(500,500,"hi");
     window.init();
+
     running = true;
   }
 
@@ -54,8 +55,8 @@ public class Engine {
 
       //Updates the DeltaTIme, setting the deltaTIme to the amount of time since this was last
       // called. Keep this at the start or end of the function
-      DeltaTime.update();
-
+      DeltaTime.update(); //TODO there needs to be a limit on max deltatime
+      renderer.update();
       // This was causing a stack overflow error, so for now it will be a loop
       //update(); // Recursive statement. Keeps the updates going for as long as the Window is open
     }
