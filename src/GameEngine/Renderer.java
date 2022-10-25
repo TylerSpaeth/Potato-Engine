@@ -46,9 +46,16 @@ public class Renderer {
     // Do all drawing here
 
     // Renders all SpriteRenders
-    for(SpriteRenderer spriteRenderer : SpriteRenderer.getSpriteRenderers()) {
-      spriteRenderer.render(graphics, window);
+
+    // TODO this should be reworked. Terrible complexity.
+    for(int i = 0; i <= SpriteRenderer.getHighestLayer(); i++) {
+      for(SpriteRenderer spriteRenderer : SpriteRenderer.getSpriteRenderers()) {
+        if(spriteRenderer.getLayer() == i) {
+          spriteRenderer.render(graphics, window);
+        }
+      }
     }
+
 
     // End drawing here
     bufferStrategy.show(); // Makes everything drawn above visible

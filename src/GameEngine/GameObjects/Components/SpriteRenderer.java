@@ -21,8 +21,11 @@ public class SpriteRenderer extends Component{
   private static ArrayList<SpriteRenderer> spriteRenderers; // List of all sprite renders that exist
   private Vector2 position;
 
+  // Which layer this Sprite should be rendered on. Layer 0 is further back than layer 1
+  private int layer;
+
   /**
-   * Default constructor for a SpriteRenderer
+   * Default constructor for a SpriteRenderer. Default layer is 0.
    */
   public SpriteRenderer() {
 
@@ -33,10 +36,12 @@ public class SpriteRenderer extends Component{
 
     this.sprite = null;
     spriteRenderers.add(this); // Add this SpriteRender to this list of SpriteRenderers
+
+    this.layer = 0; // The lowest possible layer
   }
 
   /**
-   * Constructor for a SpriteRenderer that takes a filePath
+   * Constructor for a SpriteRenderer that takes a filePath. Default layer is 0.
    *
    * @param filePath the filepath for the desired sprite
    */
@@ -57,10 +62,12 @@ public class SpriteRenderer extends Component{
     this.position = position;
 
     spriteRenderers.add(this); // Add this SpriteRender to this list of SpriteRenderers
+
+    this.layer = 0; // The lowest possible layer
   }
 
   /**
-   * Constructor for a SpriteRenderer that takes a Sprite
+   * Constructor for a SpriteRenderer that takes a Sprite. Default layer is 0.
    *
    * @param sprite the desired sprite for this SpriteRenderer
    */
@@ -75,6 +82,8 @@ public class SpriteRenderer extends Component{
     this.position = position;
 
     spriteRenderers.add(this); // Add this SpriteRender to this list of SpriteRenderers
+
+    this.layer = 0; // The lowest possible layer
   }
 
   /**
@@ -132,6 +141,31 @@ public class SpriteRenderer extends Component{
     return this.position;
   }
 
+  /**
+   * Sets the layer to this given layer. A high number will be rendered above a lower number
+   *
+   * @param layer the layer for this SpriteRenderer
+   *
+   * @throws IllegalArgumentException if the given layer is a negative number
+   */
+  public void setLayer(int layer) {
+    if(layer < 0) {
+      throw new IllegalArgumentException("Layer must be greater than or equal to 0");
+    }
+    this.layer = layer;
+  }
+
+  /**
+   * Gets the layer of this SpriteRenderer
+   *
+   * @return the layer for this SpriteRenderer
+   */
+  public int getLayer() {
+    return this.layer;
+  }
+
+
+
   // Begin Static Methods
   /**
    * Getter for the list of SpriteRenders
@@ -140,6 +174,22 @@ public class SpriteRenderer extends Component{
    */
   public static ArrayList<SpriteRenderer> getSpriteRenderers() {
     return spriteRenderers;
+  }
+
+  /**
+   * Gets the highest layer number in the spriteRenderers list
+   *
+   * @return the highest layer number in the spriteRenderers list
+   */
+  public static int getHighestLayer() {
+    // TODO test
+    int highestLayer = 0;
+    for(SpriteRenderer spriteRenderer : spriteRenderers) {
+      if(spriteRenderer.getLayer() > highestLayer) {
+        highestLayer = spriteRenderer.getLayer();
+      }
+    }
+    return highestLayer;
   }
   // End Static Methods
 }
