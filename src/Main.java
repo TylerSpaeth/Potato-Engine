@@ -1,6 +1,7 @@
 import GameEngine.Engine;
 import GameEngine.GameObjects.Components.SpriteRenderer;
 import GameEngine.GameObjects.GameObject;
+import GameEngine.Scene;
 import GameEngine.Utils.Vector2.Vector2;
 import Tests.MainTester;
 
@@ -11,9 +12,15 @@ public class Main {
     System.out.println(MainTester.runAllTests());
     // End Tests
 
-    SpriteRenderer spriteRenderer = new SpriteRenderer("cloud.png", new Vector2(5,5));
+    Scene scene = new Scene();
+    scene.setToCurrentScene();
 
-    Engine.init(500,500, "Title");
+    // Right now 300 sprites results in about 140 fps
+    for(int i = 0; i < 3000; i++) {
+      scene.addSpriteRendererToLayer(0, new SpriteRenderer("cloud.png", new Vector2(5,5)));
+    }
+
+    Engine.init(1000,1000, "Title");
     Engine.update();
   }
 }

@@ -51,12 +51,16 @@ public class Engine {
     //TODO decide if while loop or recursion is better
 
     while(running) { // While the window should not close keep updating
-
+    // TODO there needs to be a cap to the frequency of this loop
 
       //Updates the DeltaTIme, setting the deltaTIme to the amount of time since this was last
       // called. Keep this at the start or end of the function
-      DeltaTime.update(); //TODO there needs to be a limit on max deltatime
+      DeltaTime.update();
+
+      System.out.println(1/(DeltaTime.getDeltaTime()/1_000_000_000)); // Prints FPS
+
       renderer.update();
+
       // This was causing a stack overflow error, so for now it will be a loop
       //update(); // Recursive statement. Keeps the updates going for as long as the Window is open
     }

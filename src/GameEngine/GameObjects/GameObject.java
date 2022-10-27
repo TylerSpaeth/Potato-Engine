@@ -12,7 +12,8 @@ import java.util.ArrayList;
  * @author Tyler Spaeth
  */
 public class GameObject {
-  //TODO implement tester for this class
+  //TODO implement tester for this class. This class also needs to be overhauled because it does not
+  // work well with the current system
   private ArrayList<GameObject> children; // All GameObjects that are children of this
   private ArrayList<Component> components; // All components attached to this GameObject
   private boolean containsTransform; // True if this GameObject has a transform
@@ -66,16 +67,8 @@ public class GameObject {
       this.containsTransform = true;
     }
 
-    if(name == null || name.trim().equals("")) {
-      throw new IllegalArgumentException("This name is null or blank");
-    }
-    else if(names.contains(name)) {
-      throw new DuplicateRequestException("A GameObject with this name already exists");
-    }
-    else {
-      this.name = name;
-      names.add(name);
-    }
+    setName(name);
+    names.add(name);
   }
 
   /**

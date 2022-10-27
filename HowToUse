@@ -1,0 +1,2 @@
+1. You must first create a Scene and set it to the current scene
+2. Then you need to call Engine.init() as well as Engine.update()

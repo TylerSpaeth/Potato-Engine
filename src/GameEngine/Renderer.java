@@ -4,6 +4,7 @@ import GameEngine.GameObjects.Components.SpriteRenderer;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.util.ArrayList;
 
 /**
  * Class for rendering to the window
@@ -43,23 +44,33 @@ public class Renderer {
 
     graphics.clearRect(0,0, window.getWidth(), window.getHeight()); // Clears frame
 
-    // Do all drawing here
+    // Do all drawing here - Right now this draws all the SpriteRenders in the currentScene
 
-    // Renders all SpriteRenders
+    // As of right now this method seems to be capable of rendering plenty of sprites without
+    // suffering major performance issues
 
-    // TODO this should be reworked. Terrible complexity.
-    for(int i = 0; i <= SpriteRenderer.getHighestLayer(); i++) {
-      for(SpriteRenderer spriteRenderer : SpriteRenderer.getSpriteRenderers()) {
-        if(spriteRenderer.getLayer() == i) {
+    // Gets all the keys from the HashMap
+    Scene currentScene = Scene.getCurrentScene();
+    Integer[] keys = currentScene.getSpriteRenderersByLayer().keySet().toArray(new Integer[0]);
+
+    for(int i = 0; i < keys.length; i++) { // Loops through all the keys
+
+      // Gets the ArrayList for that key
+      ArrayList<SpriteRenderer> spriteRenderers = currentScene.getSpriteRenderersByLayer().get(keys[i]);
+
+      if(spriteRenderers != null) { // If that ArrayList is not null
+
+        // Draws all the SpriteRenders in the ArrayList
+        for(SpriteRenderer spriteRenderer : spriteRenderers) {
           spriteRenderer.render(graphics, window);
         }
       }
     }
 
-
     // End drawing here
+
     bufferStrategy.show(); // Makes everything drawn above visible
-    graphics.dispose(); // Gets rid of what graphics currently is so it can be reused
+    graphics.dispose(); // Gets rid of what graphics currently is, so it can be reused
   }
 
   /**

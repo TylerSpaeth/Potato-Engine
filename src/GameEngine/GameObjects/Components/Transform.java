@@ -14,7 +14,7 @@ public class Transform extends Component {
   private Vector2 scale; // Scale of the item (1,1) would be default size
 
   /**
-   * Constructor for a Transform component
+   * Constructor for a Transform component.
    *
    * @param xPosition x position for this Transform
    * @param yPosition y position for this Transform
@@ -48,8 +48,13 @@ public class Transform extends Component {
    * Sets the scale of this Transform.
    *
    * @param scale A Vector2 of the desired scale of this Transform
+   *
+   * @throws IllegalArgumentException if the x or y value of the scale is negative
    */
   public void setScale(Vector2 scale) {
+    if(scale.getX() < 0 || scale.getY() < 0) {
+      throw new IllegalArgumentException("Scale can not be negative.");
+    }
     this.scale = scale;
   }
 

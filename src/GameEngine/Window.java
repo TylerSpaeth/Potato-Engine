@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class Window extends JFrame {
 
-  Window _window = null;
+  private static Window _window = null; // The single instance of Window that is allowed
 
   private int width;
   private int height;
