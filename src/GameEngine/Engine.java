@@ -57,6 +57,7 @@ public class Engine {
       // called. Keep this at the start or end of the function
       DeltaTime.update();
 
+      // TODO fix this so it stops printing infinity
       System.out.println(1/(DeltaTime.getDeltaTime()/1_000_000_000)); // Prints FPS
 
       renderer.update();
