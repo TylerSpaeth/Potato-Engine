@@ -17,6 +17,7 @@ public class SpriteRenderer extends Component{
 
   private Image sprite; // The sprite for this GameObject
   private Vector2 position; // The position of this SpriteRenderer
+  private int layer; // The layer that the sprite should be rendered on
 
   /**
    * Default constructor for a SpriteRenderer.
@@ -24,15 +25,20 @@ public class SpriteRenderer extends Component{
   public SpriteRenderer() {
 
     this.sprite = null;
+    this.position = null;
+    this.layer = 0;
 
   }
 
+  // TODO make SpriteRenderer constructors that don't take a layer variable. Set layer to 0
   /**
    * Constructor for a SpriteRenderer that takes a filePath.
    *
    * @param filePath the filepath for the desired sprite
+   * @param position the position of the SpriteRenderer
+   * @param layer the layer to draw the sprite
    */
-  public SpriteRenderer(String filePath, Vector2 position) {
+  public SpriteRenderer(String filePath, Vector2 position, int layer) {
 
     // Load the given filePath to an Image
     try {
@@ -42,6 +48,7 @@ public class SpriteRenderer extends Component{
     }
 
     this.position = position;
+    this.layer = layer;
 
   }
 
@@ -49,12 +56,14 @@ public class SpriteRenderer extends Component{
    * Constructor for a SpriteRenderer that takes a Sprite.
    *
    * @param sprite the desired sprite for this SpriteRenderer
+   * @param position the position of the SpriteRenderer
+   * @param layer the layer to draw the sprite
    */
-  public SpriteRenderer(Image sprite, Vector2 position) {
+  public SpriteRenderer(Image sprite, Vector2 position, int layer) {
 
     this.sprite = sprite;
     this.position = position;
-
+    this.layer = layer;
   }
 
   /**
@@ -91,22 +100,22 @@ public class SpriteRenderer extends Component{
     graphics.drawImage(sprite, (int)position.getX(), (int)position.getY(), window);
   }
 
-  /**
-   * Sets the position of this SpriteRenderer to the given Vector2
-   *
-   * @param position the desired position of this sprite
-   */
+
+  // Begin Getters and Setters
   public void setPosition(Vector2 position) {
     this.position = position;
   }
 
-  /**
-   * Gets the position of this Sprite Renderer
-   *
-   * @return the Vector2 for the position of this sprite renderer
-   */
   public Vector2 getPosition() {
     return this.position;
   }
 
+  public int getLayer() {
+    return this.layer;
+  }
+
+  public void setLayer(int layer) {
+    this.layer = layer;
+  }
+  // End Getters and Setters
 }

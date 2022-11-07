@@ -1,5 +1,6 @@
 package GameEngine;
 
+import GameEngine.GameObjects.Components.Component;
 import GameEngine.GameObjects.Components.SpriteRenderer;
 import GameEngine.GameObjects.GameObject;
 import com.sun.jdi.request.DuplicateRequestException;
@@ -47,7 +48,14 @@ public class Scene {
     if(gameObject == null) {
       throw new IllegalArgumentException("This GameObject is null");
     }
-    gameObjects.add(gameObject);
+
+    gameObjects.add(gameObject); // Add this GameObject to the list of GameObjects
+
+    for(Component component : gameObject.getComponents()) { // Check comps. of the gameObject
+      if(component instanceof SpriteRenderer spriteRenderer) { // If one is a SpriteRenderer add it
+        addSpriteRendererToLayer(spriteRenderer.getLayer(), spriteRenderer);
+      }
+    }
   }
 
   /**
@@ -73,16 +81,21 @@ public class Scene {
    * @param spriteRenderer the SpriteRenderer to add
    *
    * @throws IllegalArgumentException the SpriteRenderer is null
+   * @throws DuplicateRequestException if the SpriteRenderer has already been added
    */
   public void addSpriteRendererToLayer(int layerNumber, SpriteRenderer spriteRenderer) {
-    // TODO prevent duplicate SpriteRenderers from being added
     if(spriteRenderer == null) {
       throw new IllegalArgumentException("This SpriteRenderer is null");
     }
-
     // If the layer does not exist, create it
     else if(!spriteRenderersByLayer.containsKey(layerNumber)) {
       addLayer(layerNumber);
+    }
+
+    for(int layer : spriteRenderersByLayer.keySet()) {
+      if(spriteRenderersByLayer.get(layer).contains(spriteRenderer)) {
+        throw new DuplicateRequestException("This sprite renderer has already been added to the scene");
+      }
     }
 
     spriteRenderersByLayer.get(layerNumber).add(spriteRenderer);

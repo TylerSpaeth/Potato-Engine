@@ -34,6 +34,10 @@ public class GameObject {
     this.components = new ArrayList<>();
     this.containsTransform = false;
 
+    if(names == null) {
+      names = new ArrayList<>();
+    }
+
     if(name == null || name.trim().equals("")) {
       throw new IllegalArgumentException("This name is null or blank");
     }
@@ -58,6 +62,10 @@ public class GameObject {
   public GameObject(String name, Transform transform) {
     this.children = new ArrayList<>();
     this.components = new ArrayList<>();
+
+    if(names == null) {
+      names = new ArrayList<>();
+    }
 
     if(transform == null) {
       throw new IllegalArgumentException("Transform is null");
